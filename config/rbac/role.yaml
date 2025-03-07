@@ -1,0 +1,52 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - dispatch.twistedsolutions.se
+  resources:
+  - motds
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - dispatch.twistedsolutions.se
+  resources:
+  - motds/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - dispatch.twistedsolutions.se
+  resources:
+  - motds/status
+  verbs:
+  - get
+  - patch
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: manager-role
+  namespace: openshift
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - motd
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch

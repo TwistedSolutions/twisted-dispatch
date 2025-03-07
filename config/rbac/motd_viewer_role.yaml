@@ -1,0 +1,23 @@
+# permissions for end users to view motds.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: twisted-dispatch
+    app.kubernetes.io/managed-by: kustomize
+  name: motd-viewer-role
+rules:
+- apiGroups:
+  - dispatch.twistedsolutions.se
+  resources:
+  - motds
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - dispatch.twistedsolutions.se
+  resources:
+  - motds/status
+  verbs:
+  - get
