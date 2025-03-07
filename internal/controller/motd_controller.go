@@ -68,6 +68,8 @@ type MotdReconciler struct {
 func (r *MotdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := log.FromContext(ctx)
 
+	logger.Info("Starting Motd reconciliation")
+
 	var motd dispatchv1alpha1.Motd
 	if err := r.Get(ctx, req.NamespacedName, &motd); err != nil {
 		logger.Error(err, "unable to fetch Motd")
@@ -197,6 +199,7 @@ func (r *MotdReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.
 		}
 	}
 
+	logger.Info("Finished Motd reconciliation")
 	// Requeue after a minute; adjust as needed per your refresh logic.
 	return ctrl.Result{RequeueAfter: time.Duration(motd.Spec.RefreshInterval) * time.Second}, nil
 }
