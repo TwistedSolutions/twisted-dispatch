@@ -53,6 +53,8 @@ type MotdReconciler struct {
 // +kubebuilder:rbac:groups=dispatch.twistedsolutions.se,resources=motds/finalizers,verbs=update
 
 // +kubebuilder:rbac:namespace=openshift,groups="",resources=configmaps,resourceNames=motd,verbs=get;list;watch;create;update;patch
+// +kubebuilder:rbac:groups="",resources=nodes,verbs=get;list;watch
+// +kubebuilder:rbac:groups=config.openshift.io,resources=clusteroperators,verbs=get;list;watch
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
